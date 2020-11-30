@@ -618,8 +618,6 @@ module.exports = {
         .populate("memberId")
         .populate("bankId");
 
-      console.log(booking);
-
       res.render("admin/booking/show_detail_booking", {
         title: "Staycation | Detail Booking",
         user: req.session.user,
