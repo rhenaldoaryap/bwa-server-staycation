@@ -79,7 +79,6 @@ module.exports = {
     }
   },
 
-  //contoh read data data CRUD
   viewCategory: async (req, res) => {
     try {
       const category = await Category.find();
@@ -97,9 +96,7 @@ module.exports = {
     }
   },
 
-  //contoh create data dalam CRUD
   addCategory: async (req, res) => {
-    //handle error cos blank space still could add data to database
     try {
       const { name } = req.body;
       // console.log(name);
@@ -114,7 +111,6 @@ module.exports = {
     }
   },
 
-  //contoh update data dalam CRUD
   editCategory: async (req, res) => {
     try {
       const { id, name } = req.body;
@@ -131,7 +127,6 @@ module.exports = {
     }
   },
 
-  //what are you looking for? this one absolutely for delete in CRUD
   deleteCategory: async (req, res) => {
     try {
       const { id } = req.params;
@@ -236,6 +231,7 @@ module.exports = {
       const item = await Item.find()
         .populate({ path: "imageId", select: "id imageUrl" })
         .populate({ path: "categoryId", select: "id name" });
+
       const category = await Category.find();
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
@@ -406,7 +402,6 @@ module.exports = {
     }
   },
 
-  // view Feature dan Activity tergabung di viewDetailItem
   viewDetailItem: async (req, res) => {
     const { itemId } = req.params;
     try {
@@ -434,6 +429,7 @@ module.exports = {
 
   addFeature: async (req, res) => {
     const { name, qty, itemId } = req.body;
+
     try {
       if (!req.file) {
         req.flash("alertMessage", "Image not found");
@@ -514,6 +510,7 @@ module.exports = {
 
   addActivity: async (req, res) => {
     const { name, type, itemId } = req.body;
+
     try {
       if (!req.file) {
         req.flash("alertMessage", "Image not found");
@@ -614,6 +611,7 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
+
       const booking = await Booking.findOne({ _id: id })
         .populate("memberId")
         .populate("bankId");
